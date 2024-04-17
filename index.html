@@ -24,14 +24,10 @@
   </head>
   <body>
     <header class="mx-auto">
-      <nav id="nav" class="bg-gray-300 p-8 flex gap-12 justify-center rounded">
-        <!-- <button>Politics</button> -->
-        <!-- <button>Politics</button>
-        <button>Politics</button>
-        <button>Politics</button>
-        <button>Politics</button>
-        <button>Politics</button> -->
-      </nav>
+      <nav
+        id="nav"
+        class="bg-gray-300 p-8 flex gap-12 justify-center rounded"
+      ></nav>
     </header>
     <main class="container mx-auto">
       <!-- search section -->
@@ -43,12 +39,21 @@
             id="search_field"
             class="bg-slate-100 py-3 px-20 rounded-lg w-[60%]"
           />
-          <button id="search_btn" class="btn bg-gray-300">Search</button>
+          <button onclick="search_btn()" class="btn bg-gray-300">Search</button>
         </div>
       </section>
 
       <!-- card section -->
       <section class="flex flex-col items-center">
+        <!-- loader section -->
+        <div id="loader" class="mt-12">
+          <span class="loading loading-bars loading-lg"></span>
+          <span class="loading loading-bars loading-lg"></span>
+          <span class="loading loading-bars loading-lg"></span>
+          <span class="loading loading-bars loading-lg"></span>
+          <span class="loading loading-bars loading-lg"></span>
+        </div>
+
         <div
           id="card_container"
           class="rounded-lg w-[70%] flex flex-col gap-y-12"
@@ -91,46 +96,22 @@
               </div>
             </div>
           </div> -->
-
-          <!-- <div class="card_style shadow-2xl rounded-lg">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZodG-dXHuHHmA7_D1XFCAt43bVhk4DBtjYw&s"
-              alt="joe-biden photo"
-              class="w-[20%] rounded-lg"
-            />
-            <div class="flex flex-col justify-center gap-4">
-              <div class="flex justify-around w-[90%]">
-                <h1 class="font-bold text-xl">Lorem ipsum dolor sit amet</h1>
-                <h3 class="font-bold">Good <sup>4.5</sup></h3>
-              </div>
-              <p class="my-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-                enim magnam cum iusto doloremque, pariatur sint eius. Aliquam,
-                facere praesentium
-              </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-5">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnu3u6_rI0TQ_C9VMaJLUMog7BJOd7DwUwA&s"
-                    alt="author size photo"
-                    class="w-[10%]"
-                  />
-                  <div>
-                    <p class="font-bold">Mac Donald</p>
-                    <p><span>Date : </span>02-02-2020</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-20">
-                  <span class="text-xl font-bold flex">
-                    <i class="fa-regular fa-eye text-3xl font-bold mr-2"></i>
-                    451
-                  </span>
-                  <button class="btn bg-gray-300">Details</button>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
+
+        <!-- modal section -->
+
+        <!-- Open the modal using ID.showModal() method -->
+
+        <!-- <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <p id="news_details" class="py-4"></p>
+            <div class="modal-action">
+              <form method="dialog">
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog> -->
       </section>
     </main>
     <footer class="flex justify-center items-center mt-20 mb-5">

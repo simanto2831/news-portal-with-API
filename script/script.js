@@ -10,22 +10,33 @@ const loadCategory = async () => {
   category.forEach((item) => {
     const btn = document.createElement("button");
     btn.innerText = `${item.category_name}`;
+    btn.addEventListener("click", () => {
+      newsCategory(item.category_id);
+    });
     nav.appendChild(btn);
-    // console.log(item);
+    // console.log(item.category_id);
   });
 };
 
 // 2. load different category news by their individual ID
-const newsCategory = async () => {
+const newsCategory = async (catID) => {
+  //4. loading spinner add
+  const loader = document.getElementById("loader");
+  loader.classList.remove("hidden");
+
   const res = await fetch(
-    `https://openapi.programming-hero.com/api/news/category/01`
+    `https://openapi.programming-hero.com/api/news/category/${catID}`
   );
+  // console.log(catID);
   const data = await res.json();
   const items = data.data;
-  console.log(items);
+  // console.log(items);
   const card_container = document.getElementById("card_container");
+  card_container.innerHTML = "";
+  loader.classList.remove("hidden");
 
   items.forEach((item) => {
+    // console.log(item);
     const div = document.createElement("div");
     div.classList.add("card_style", "shadow-lg");
     div.innerHTML = `
@@ -36,39 +47,63 @@ const newsCategory = async () => {
       />
       <div class="flex flex-col justify-center gap-4">
         <div class="flex justify-around w-[90%]">
-          <h1 class="font-bold text-xl">Lorem ipsum dolor sit amet</h1>
-          <h3 class="font-bold">Good <sup>4.5</sup></h3>
+          <h1 class="font-bold text-xl w-[70%]">${item.title}</h1>
+          <h3 class="font-bold">${item.rating.badge} <sup>${
+      item.rating.number
+    }</sup></h3>
         </div>
-        <p class="my-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-          enim magnam cum iusto doloremque, pariatur sint eius. Aliquam,
-          facere praesentium
+        <p class="">
+          ${item.details.slice(0, 150)}
         </p>
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-5">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJnu3u6_rI0TQ_C9VMaJLUMog7BJOd7DwUwA&s"
+              src="${item.author.img}"
               alt="author size photo"
-              class="w-[10%]"
+              class="w-[8%] rounded-full"
             />
             <div>
-              <p class="font-bold">Mac Donald</p>
-              <p><span>Date : </span>02-02-2020</p>
+              <p class="font-bold">${item.author.name}</p>
+              <p><span>Date : </span>${item.author.published_date}</p>
             </div>
           </div>
           <div class="flex items-center gap-20">
-            <span class="text-xl font-bold">
-              <i class="fa-regular fa-eye text-3xl font-bold mr-2"></i>
-              451
+            <span class="flex font-bold">
+              <i class="fa-regular fa-eye text-xl font-bold mr-2"></i>
+              ${item.total_view}
             </span>
-            <button class="btn bg-gray-300">Details</button>
+            <button onclick="handleDetailsBtn('${
+              item.details
+            }')" class="btn bg-gray-300">Details</button>
           </div>
         </div>
       </div>
         `;
 
     card_container.appendChild(div);
+
+    // remove loader spinner
+    loader.classList.add("hidden");
   });
 };
-newsCategory();
+
+// 3. handle search button
+const search_btn = () => {
+  const inputValue = document.getElementById("search_field").value;
+  if (inputValue) {
+    newsCategory(inputValue);
+  } else {
+    alert("Please enter a valid ID");
+  }
+};
+
+// 5. handle details button
+const handleDetailsBtn = (details) => {
+  // const news_details = document.getElementById("news_details");
+  // news_details.innerText = details;
+  // my_modal_5.showModal();
+  console.log(details);
+};
+
 loadCategory();
+newsCategory("01");
